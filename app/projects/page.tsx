@@ -1,3 +1,7 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 
@@ -26,6 +30,12 @@ const projects = [
 ];
 
 export default function ProjectsPage() {
+  const [search, setSearch] = useState("");
+  const filteredProjects = projects.filter((project) =>
+    project.employee.toLowerCase().includes(search.toLowerCase()) ||
+    project.project.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
@@ -37,6 +47,16 @@ export default function ProjectsPage() {
           <h1 className="text-3xl font-bold mb-6">
             案件一覧
           </h1>
+
+          <div className="mb-6">
+            <input
+              type="text"
+              placeholder="社員名・案件名で検索"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full md:w-80 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
           <div className="bg-white rounded-lg shadow">
             <table className="w-full">
@@ -56,11 +76,29 @@ export default function ProjectsPage() {
                     className="border-t hover:bg-gray-50"
                   >
                     <td className="p-4">{project.employee}</td>
-                    <td className="p-4">{project.project}</td>
+
                     <td className="p-4">
-                      <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm">
-                        {project.status}
-                      </span>
+                      <Link
+                        href={`/projects/${project.id}`}
+                        className="text-blue-600 hover:underline"
+                      >
+                        {project.project}
+                      </Link>
+                    </td>
+                    
+                    <td className="p-4">
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm
+                        ${
+                          project.status === "進行中"
+                            ? "bg-blue-100 text-blue-700"
+                            : project.status === "完了"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-yellow-100 text-yellow-700"
+                        }`}
+                    >
+                      {project.status}
+                    </span>
                     </td>
                     <td className="p-4">{project.start}</td>
                   </tr>
