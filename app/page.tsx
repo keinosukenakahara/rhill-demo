@@ -1,3 +1,4 @@
+import DashboardCard from "@/components/DashboardCard";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 
@@ -19,48 +20,28 @@ export default function Home() {
 
             <div className="grid grid-cols-2 gap-6">
 
-              <div className="bg-white rounded-lg shadow p-6">
-                <p className="text-gray-500">
-                  案件数
-                </p>
+              <DashboardCard
+                title="案件数"
+                value="18件"
+              />
 
-                <p className="text-4xl font-bold mt-4">
-                  18件
-                </p>
-              </div>
+              <DashboardCard
+                title="配置待ち"
+                value="6件"
+              />
 
-              <div className="bg-white rounded-lg shadow p-6">
-                <p className="text-gray-500">
-                  配置待ち
-                </p>
+              <DashboardCard
+                title="受入確認"
+                value="4件"
+              />
 
-                <p className="text-4xl font-bold mt-4">
-                  6件
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg shadow p-6">
-                <p className="text-gray-500">
-                  受入確認
-                </p>
-
-                <p className="text-4xl font-bold mt-4">
-                  4件
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg shadow p-6">
-                <p className="text-gray-500">
-                  完了
-                </p>
-
-                <p className="text-4xl font-bold mt-4">
-                  12件
-                </p>
-              </div>
+              <DashboardCard
+                title="完了"
+                value="12件"
+              />
 
             </div>
-
+            
           </main>
 
       </div>
