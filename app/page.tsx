@@ -21,23 +21,31 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-6">
 
               <DashboardCard
-                title="案件数"
-                value="18件"
+                  title="案件数"
+                  value="18件"
+                  icon="📦"
+                  change="↑ +2 本日"
               />
 
               <DashboardCard
-                title="配置待ち"
-                value="6件"
+                  title="配置待ち"
+                  value="6件"
+                  icon="👤"
+                  change="↓ -1 昨日"
               />
 
               <DashboardCard
-                title="受入確認"
-                value="4件"
+                  title="受入確認"
+                  value="4件"
+                  icon="📝"
+                  change="↑ +1 本日"
               />
 
               <DashboardCard
-                title="完了"
-                value="12件"
+                  title="完了"
+                  value="12件"
+                  icon="✅"
+                  change="↑ +5 今週"
               />
 
             </div>
