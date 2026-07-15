@@ -1,3 +1,4 @@
+import Link from "next/link";
 import DashboardCard from "@/components/DashboardCard";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
@@ -20,33 +21,41 @@ export default function Home() {
 
             <div className="grid grid-cols-2 gap-6">
 
-              <DashboardCard
-                  title="案件数"
-                  value="18件"
-                  icon="📦"
-                  change="↑ +2 本日"
-              />
+              <Link href="/projects">
+                <DashboardCard
+                    title="案件数"
+                    value="18件"
+                    icon="📦"
+                    change="↑ +2 本日"
+                />
+              </Link>
 
-              <DashboardCard
-                  title="配置待ち"
-                  value="6件"
-                  icon="👤"
-                  change="↓ -1 昨日"
-              />
+              <Link href="/waiting">
+                <DashboardCard
+                    title="配置待ち"
+                    value="6件"
+                    icon="👤"
+                    change="↓ -1 昨日"
+                />
+              </Link>
 
-              <DashboardCard
-                  title="受入確認"
-                  value="4件"
-                  icon="📝"
-                  change="↑ +1 本日"
-              />
+              <Link href="/receiving">
+                <DashboardCard
+                    title="受入確認"
+                    value="4件"
+                    icon="📝"
+                    change="↑ +1 本日"
+                />
+              </Link>
 
-              <DashboardCard
-                  title="完了"
-                  value="12件"
-                  icon="✅"
-                  change="↑ +5 今週"
-              />
+              <Link href="/completed">
+                <DashboardCard
+                    title="完了"
+                    value="12件"
+                    icon="✅"
+                    change="↑ +5 今週"
+                />
+              </Link>
 
             </div>
             
