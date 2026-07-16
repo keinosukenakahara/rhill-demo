@@ -1,8 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function NewProjectPage() {
+  const router = useRouter();
+  const [success, setSuccess] = useState(false);
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
@@ -62,7 +68,23 @@ export default function NewProjectPage() {
               </select>
             </div>
 
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+            {success && (
+              <div className="mb-4 rounded-lg bg-green-100 border border-green-400 text-green-700 px-4 py-3">
+                ✅ 案件を登録しました。
+              </div>
+            )}
+
+            <button
+              onClick={() => {
+                setSuccess(true);
+
+                setTimeout(() => {
+                  router.push("/projects");
+                }, 1000);
+              }} 
+
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
+            >
               登録
             </button>
 

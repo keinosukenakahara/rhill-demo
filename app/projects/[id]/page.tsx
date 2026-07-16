@@ -2,39 +2,18 @@ import ProjectActions from "@/components/ProjectActions";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-
-const projects = [
-  {
-    id: 1,
-    employee: "山田 太郎",
-    project: "PCキッティング",
-    status: "進行中",
-    start: "2026/07/01",
-  },
-  {
-    id: 2,
-    employee: "佐藤 花子",
-    project: "LAN配線工事",
-    status: "完了",
-    start: "2026/06/15",
-  },
-  {
-    id: 3,
-    employee: "鈴木 一郎",
-    project: "ネットワーク構築",
-    status: "待機",
-    start: "2026/08/01",
-  },
-];
+import { projects, type Project } from "@/lib/projects";
 
 export default async function ProjectDetail({
   params,
-}: {
+  }: {
   params: Promise<{ id: string }>;
-}) {
+  }) {
   const { id } = await params;
 
-  const project = projects.find((p) => p.id === Number(id));
+  const project: Project | undefined = projects.find(
+  (p) => p.id === Number(id)
+  );
 
   if (!project) {
     return <div>案件が見つかりません。</div>;
@@ -110,7 +89,7 @@ export default async function ProjectDetail({
               </span>
             </div>
 
-            <ProjectActions />
+           <ProjectActions projectId={project.id} />
 
             <div className="pt-6">
               <Link

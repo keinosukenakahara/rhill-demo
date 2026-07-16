@@ -2,8 +2,24 @@ import Link from "next/link";
 import DashboardCard from "@/components/DashboardCard";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import { projects } from "@/lib/projects";
 
 export default function Home() {
+
+    const totalProjects = projects.length;
+
+    const inProgress = projects.filter(
+      (p) => p.status === "進行中"
+    ).length;
+
+    const completed = projects.filter(
+      (p) => p.status === "完了"
+    ).length;
+
+    const notStarted = projects.filter(
+      (p) => p.status === "未着手"
+    ).length;
+
   return (
     <div className="min-h-screen bg-gray-100">
 
@@ -24,7 +40,7 @@ export default function Home() {
               <Link href="/projects">
                 <DashboardCard
                     title="案件数"
-                    value="18件"
+                    value={`${totalProjects}件`}
                     icon="📦"
                     change="↑ +2 本日"
                 />
@@ -32,8 +48,8 @@ export default function Home() {
 
               <Link href="/waiting">
                 <DashboardCard
-                    title="配置待ち"
-                    value="6件"
+                    title="未着手"
+                    value={`${notStarted}件`}
                     icon="👤"
                     change="↓ -1 昨日"
                 />
@@ -41,8 +57,8 @@ export default function Home() {
 
               <Link href="/receiving">
                 <DashboardCard
-                    title="受入確認"
-                    value="4件"
+                    title="進行中"
+                    value={`${inProgress}件`}
                     icon="📝"
                     change="↑ +1 本日"
                 />
@@ -51,7 +67,7 @@ export default function Home() {
               <Link href="/completed">
                 <DashboardCard
                     title="完了"
-                    value="12件"
+                    value={`${completed}件`}
                     icon="✅"
                     change="↑ +5 今週"
                 />

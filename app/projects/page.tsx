@@ -4,37 +4,21 @@ import Link from "next/link";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-
-const projects = [
-  {
-    id: 1,
-    employee: "山田 太郎",
-    project: "PCキッティング",
-    status: "進行中",
-    start: "2026/07/01",
-  },
-  {
-    id: 2,
-    employee: "佐藤 花子",
-    project: "LAN配線工事",
-    status: "完了",
-    start: "2026/06/15",
-  },
-  {
-    id: 3,
-    employee: "鈴木 一郎",
-    project: "ネットワーク構築",
-    status: "待機",
-    start: "2026/08/01",
-  },
-];
+import { projects, type Project } from "@/lib/projects";
 
 export default function ProjectsPage() {
   const [search, setSearch] = useState("");
-  const filteredProjects = projects.filter((project) =>
-    project.employee.toLowerCase().includes(search.toLowerCase()) ||
-    project.project.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredProjects: Project[] = projects.filter((project) =>{
+    const keyword = search.toLowerCase();
+
+    return (
+      project.employee.toLowerCase().includes(keyword) ||
+      project.project.toLowerCase().includes(keyword)
+    );
+  });
+
+  console.log("検索文字:", search);
+  console.log("結果:", filteredProjects); 
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -70,6 +54,10 @@ export default function ProjectsPage() {
             />
           </div>
 
+          <p className="mb-4 text-sm text-gray-600">
+          検索結果：{filteredProjects.length}件
+          </p>
+
           <div className="bg-white rounded-lg shadow">
             <table className="w-full">
               <thead className="bg-gray-100">
@@ -78,11 +66,12 @@ export default function ProjectsPage() {
                   <th className="text-left p-4">案件名</th>
                   <th className="text-left p-4">ステータス</th>
                   <th className="text-left p-4">開始日</th>
+                  <th className="text-left p-4">操作</th>
                 </tr>
               </thead>
 
               <tbody>
-                 {filteredProjects.map((project) => (
+                 {filteredProjects.map((project: Project) => (
                   <tr
                     key={project.id}
                     className="border-t hover:bg-gray-50"
@@ -113,6 +102,15 @@ export default function ProjectsPage() {
                     </span>
                     </td>
                     <td className="p-4">{project.start}</td>
+
+                    <td className="p-4">
+                      <Link
+                        href={`/projects/${project.id}/edit`}
+                        className="text-blue-600 hover:underline"
+                      >
+                        編集
+                      </Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>
