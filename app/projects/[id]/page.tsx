@@ -1,3 +1,4 @@
+import ProjectActions from "@/components/ProjectActions";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
@@ -47,6 +48,25 @@ export default async function ProjectDetail({
         <Sidebar />
 
         <main className="flex-1 p-8">
+
+          <nav className="text-sm text-gray-500 mb-4">
+            <Link href="/" className="hover:underline">
+              ダッシュボード
+            </Link>
+
+            <span className="mx-2">›</span>
+
+            <Link href="/projects" className="hover:underline">
+              案件一覧
+            </Link>
+
+            <span className="mx-2">›</span>
+
+            <span className="text-gray-700 font-medium">
+              案件詳細
+            </span>
+          </nav>
+
           <h1 className="text-3xl font-bold mb-8">
             案件詳細
           </h1>
@@ -89,6 +109,8 @@ export default async function ProjectDetail({
                 {project.status}
               </span>
             </div>
+
+            <ProjectActions />
 
             <div className="pt-6">
               <Link

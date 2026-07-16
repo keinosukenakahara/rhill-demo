@@ -44,11 +44,23 @@ export default function ProjectsPage() {
         <Sidebar />
 
         <main className="flex-1 p-8">
-          <h1 className="text-3xl font-bold mb-6">
-            案件一覧
-          </h1>
 
-          <div className="mb-6">
+        <div className="flex justify-between items-center mb-6">
+        
+            <h1 className="text-3xl font-bold">
+              案件一覧
+            </h1>
+
+            <Link
+              href="/projects/new"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+            >
+              ＋ 新規案件
+            </Link>
+
+          </div>
+
+        <div className="mb-6">
             <input
               type="text"
               placeholder="社員名・案件名で検索"
@@ -70,7 +82,7 @@ export default function ProjectsPage() {
               </thead>
 
               <tbody>
-                {projects.map((project) => (
+                 {filteredProjects.map((project) => (
                   <tr
                     key={project.id}
                     className="border-t hover:bg-gray-50"
