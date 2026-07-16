@@ -71,48 +71,64 @@ export default function ProjectsPage() {
               </thead>
 
               <tbody>
-                 {filteredProjects.map((project: Project) => (
-                  <tr
-                    key={project.id}
-                    className="border-t hover:bg-gray-50"
-                  >
-                    <td className="p-4">{project.employee}</td>
-
-                    <td className="p-4">
-                      <Link
-                        href={`/projects/${project.id}`}
-                        className="text-blue-600 hover:underline"
-                      >
-                        {project.project}
-                      </Link>
-                    </td>
-                    
-                    <td className="p-4">
-                    <span
-                      className={`px-3 py-1 rounded-full text-sm
-                        ${
-                          project.status === "進行中"
-                            ? "bg-blue-100 text-blue-700"
-                            : project.status === "完了"
-                            ? "bg-green-100 text-green-700"
-                            : "bg-yellow-100 text-yellow-700"
-                        }`}
+                {filteredProjects.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan={5}
+                      className="p-8 text-center text-gray-500"
                     >
-                      {project.status}
-                    </span>
-                    </td>
-                    <td className="p-4">{project.start}</td>
-
-                    <td className="p-4">
-                      <Link
-                        href={`/projects/${project.id}/edit`}
-                        className="text-blue-600 hover:underline"
-                      >
-                        編集
-                      </Link>
+                      該当する案件がありません。
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  filteredProjects.map((project: Project) => (
+                    <tr
+                      key={project.id}
+                      className="border-t hover:bg-gray-50"
+                    >
+                      <td className="p-4">
+                        {project.employee}
+                      </td>
+
+                      <td className="p-4">
+                        <Link
+                          href={`/projects/${project.id}`}
+                          className="text-blue-600 hover:underline"
+                        >
+                          {project.project}
+                        </Link>
+                      </td>
+
+                      <td className="p-4">
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm
+                            ${
+                              project.status === "進行中"
+                                ? "bg-blue-100 text-blue-700"
+                                : project.status === "完了"
+                                ? "bg-green-100 text-green-700"
+                                : "bg-yellow-100 text-yellow-700"
+                            }`}
+                        >
+                          {project.status}
+                        </span>
+                      </td>
+
+                      <td className="p-4">
+                        {project.start}
+                      </td>
+
+                      <td className="p-4">
+                        <Link
+                          href={`/projects/${project.id}/edit`}
+                          className="text-blue-600 hover:underline"
+                        >
+                          編集
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
