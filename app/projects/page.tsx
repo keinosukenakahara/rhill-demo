@@ -1,14 +1,24 @@
+
+"use client";
+
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { projects, type Project } from "@/lib/projects";
+import {
+  projects as initialProjects,
+  type Project,
+} from "@/lib/projects";
 
 export default function ProjectsPage() {
   const [search, setSearch] = useState("");
-  const filteredProjects: Project[] = projects.filter((project) =>{
+
+  const [projectsData, setProjectsData] =
+    useState<Project[]>(initialProjects);
+  
+  const filteredProjects = projectsData.filter((project) => {
     const keyword = search.toLowerCase();
 
     return (
@@ -17,8 +27,28 @@ export default function ProjectsPage() {
     );
   });
 
-  console.log("検索文字:", search);
-  console.log("結果:", filteredProjects); 
+  const removeProject = (id: number) => {
+    const newProjects = projectsData.filter(
+      (project) => project.id !== id
+    );
+
+    setProjectsData(newProjects);
+  };
+
+  useEffect(() => {
+    const savedProjects = localStorage.getItem("projects");
+
+    if (savedProjects) {
+      setProjectsData(JSON.parse(savedProjects));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "projects",
+      JSON.stringify(projectsData)
+    );
+  }, [projectsData]);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -119,13 +149,30 @@ export default function ProjectsPage() {
                       </td>
 
                       <td className="p-4">
-                        <Link
-                          href={`/projects/${project.id}/edit`}
-                          className="text-blue-600 hover:underline"
-                        >
-                          編集
-                        </Link>
+                        <div className="flex items-center gap-4">
+                          <Link
+                            href={`/projects/${project.id}/edit`}
+                            className="text-blue-600 hover:underline"
+                          >
+                            編集
+                          </Link>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const ok = window.confirm("この案件を削除しますか？");
+
+                              if (!ok) return;
+
+                              removeProject(project.id);
+                            }}
+                            className="text-red-600 hover:underline"
+                          >
+                            削除
+                          </button>
+                        </div>
                       </td>
+
                     </tr>
                   ))
                 )}

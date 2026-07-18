@@ -1,14 +1,24 @@
+"use client";
+
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import ProjectActions from "@/components/ProjectActions";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { projects, type Project } from "@/lib/projects";
 
-export default async function ProjectDetail({
-  params,
-  }: {
-  params: Promise<{ id: string }>;
-  }) {
+type Project = {
+  id: number;
+  employee: string;
+  project: string;
+  status: string;
+  start: string;
+};
+
+export default function ProjectDetail() {
+  const params = useParams();
+   
   const { id } = await params;
 
   const project: Project | undefined = projects.find(

@@ -43,7 +43,7 @@ export default function ProjectActions({ projectId }: Props) {
 
         <button
           onClick={handleDelete}
-          className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition"
+          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
         >
           削除
         </button>

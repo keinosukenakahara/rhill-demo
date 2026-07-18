@@ -1,32 +1,66 @@
+import Link from "next/link";
+
 export default function Sidebar() {
   return (
     <aside className="w-64 bg-gray-800 text-white min-h-screen p-4">
       <nav>
         <ul className="space-y-3">
-          <li className="hover:text-yellow-300 cursor-pointer">
-            ダッシュボード
+
+          <li>
+            <Link
+              href="/"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              🏠 業務ポータル
+            </Link>
           </li>
 
-          <li className="hover:text-yellow-300 cursor-pointer">
-            案件一覧
+          <li>
+            <Link
+              href="/projects"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              📦 配置管理
+            </Link>
           </li>
 
-          <li className="hover:text-yellow-300 cursor-pointer">
-            配置計画
+          <li>
+            <Link
+              href="/delivery"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              🚚 宅配管理
+            </Link>
           </li>
 
-          <li className="hover:text-yellow-300 cursor-pointer">
-            受入確認
+          <li>
+            <Link
+              href="/dispatch"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              📋 手配管理
+            </Link>
           </li>
 
-          <li className="hover:text-yellow-300 cursor-pointer">
-            完了
+          <li>
+            <Link
+              href="/system"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              🏗 システム構成
+            </Link>
           </li>
+
+          <li className="rounded px-3 py-2 text-gray-400">
+            📊 分析（準備中）
+          </li>
+
+          <li className="rounded px-3 py-2 text-gray-400">
+            ⚙ マスタ管理（準備中）
+          </li>
+
         </ul>
       </nav>
     </aside>
   );
 }
-
-
-
