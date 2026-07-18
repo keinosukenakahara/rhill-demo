@@ -62,14 +62,26 @@ export default function PlacementsPage() {
                       {placement.status}
                     </td>
 
-                    <td className="px-4 py-3 text-center">
+                  <td className="px-4 py-3 text-center">
+                    <div className="flex justify-center gap-3">
+
                       <Link
                         href={`/placements/${placement.id}`}
                         className="text-blue-600 hover:underline"
                       >
                         詳細
                       </Link>
-                    </td>
+
+                      <Link
+                        href={`/placements/${placement.id}/edit`}
+                        className="text-green-600 hover:underline"
+                      >
+                        編集
+                      </Link>
+
+                    </div>
+                  </td>
+                  
                   </tr>
                 ))}
               </tbody>

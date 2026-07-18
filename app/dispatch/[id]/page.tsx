@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { placements } from "@/lib/placements";
+import { dispatches } from "@/lib/dispatches";
 
 type Props = {
   params: Promise<{
@@ -9,17 +9,17 @@ type Props = {
   }>;
 };
 
-export default async function PlacementDetailPage({
+export default async function DispatchDetailPage({
   params,
 }: Props) {
   const { id } = await params;
 
-  const placement = placements.find(
+  const dispatch  =dispatches.find(
     (p) => p.id === Number(id)
   );
 
-  if (!placement) {
-    return <div>配置データが見つかりません。</div>;
+  if (!dispatch ) {
+    return <div>手配データが見つかりません。</div>;
   }
 
   return (
@@ -31,21 +31,21 @@ export default async function PlacementDetailPage({
 
         <main className="flex-1 p-8">
           <h2 className="mb-6 text-2xl font-bold">
-            配置詳細
+            手配詳細
           </h2>
 
           <div className="rounded-lg bg-white p-6 shadow space-y-4">
-            <p><strong>ID：</strong>{placement.id}</p>
-            <p><strong>担当者：</strong>{placement.employee}</p>
-            <p><strong>配置先：</strong>{placement.destination}</p>
-            <p><strong>開始日：</strong>{placement.startDate}</p>
-            <p><strong>ステータス：</strong>{placement.status}</p>
+            <p><strong>ID：</strong>{dispatch.id}</p>
+            <p><strong>担当者：</strong>{dispatch.employee}</p>
+            <p><strong>配置先：</strong>{dispatch.destination}</p>
+            <p><strong>開始日：</strong>{dispatch.dispatchDate}</p>
+            <p><strong>ステータス：</strong>{dispatch.status}</p>
           </div>
 
           <div className="mt-6 flex items-center gap-3">
 
             <Link
-              href={`/placements/${placement.id}/edit`}
+              href={`/dispatch/${dispatch.id}/edit`}
               className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
             >
               ✏️ 編集
