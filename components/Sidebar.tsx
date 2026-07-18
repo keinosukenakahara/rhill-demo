@@ -68,6 +68,15 @@ export default function Sidebar() {
             ⚙ マスタ管理（準備中）
           </li>
 
+          <li>
+            <Link
+              href="/dispatch"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              🚚 手配管理
+            </Link>
+          </li>
+
         </ul>
       </nav>
     </aside>

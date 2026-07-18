@@ -1,32 +1,61 @@
 import Link from "next/link";
+import { dispatches } from "@/lib/dispatches";
 
 export default function DispatchPage() {
   return (
     <main className="p-8">
-      <h1 className="text-3xl font-bold mb-4">
-        📋 手配管理システム
-      </h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">
+          🚚 手配管理
+        </h1>
 
-      <p className="mb-8 text-gray-600">
-        現在、RHILL業務管理システムへ統合中です。
-      </p>
+        <Link
+          href="/dispatch/new"
+          className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+        >
+          ＋ 新規手配
+        </Link>
+      </div>
 
-      <div className="rounded-lg border bg-white p-6 shadow">
-        <h2 className="text-xl font-semibold mb-4">
-          今後実装予定
-        </h2>
+      <div className="overflow-x-auto rounded-lg border bg-white shadow">
+        <table className="w-full">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="p-3 text-left">担当者</th>
+              <th className="p-3 text-left">案件</th>
+              <th className="p-3 text-left">配送業者</th>
+              <th className="p-3 text-left">手配日</th>
+              <th className="p-3 text-left">ステータス</th>
+            </tr>
+          </thead>
 
-        <ul className="list-disc ml-6 space-y-2">
-          <li>案件手配</li>
-          <li>担当者管理</li>
-          <li>進捗管理</li>
-          <li>完了管理</li>
-        </ul>
+          <tbody>
+            {dispatches.map((item) => (
+              <tr key={item.id} className="border-t">
+                <td className="p-3">{item.employee}</td>
+                <td className="p-3">{item.project}</td>
+                <td className="p-3">{item.vendor}</td>
+                <td className="p-3">{item.dispatchDate}</td>
+                <td className="p-3">
+                  <span
+                    className={`rounded-full px-3 py-1 text-sm ${
+                      item.status === "手配済"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-yellow-100 text-yellow-700"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <Link
         href="/"
-        className="inline-block mt-8 rounded bg-blue-600 px-5 py-2 text-white hover:bg-blue-700"
+        className="inline-block mt-6 rounded bg-gray-600 px-4 py-2 text-white hover:bg-gray-700"
       >
         ← 業務ポータルへ戻る
       </Link>

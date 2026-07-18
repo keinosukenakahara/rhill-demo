@@ -1,7 +1,8 @@
 export type Dispatch = {
   id: number;
   employee: string;
-  destination: string;
+  project: string;
+  vendor: string;
   dispatchDate: string;
   status: string;
 };
@@ -10,22 +11,35 @@ export const dispatches: Dispatch[] = [
   {
     id: 1,
     employee: "山田 太郎",
-    destination: "大阪本社",
-    dispatchDate: "2026-07-22",
-    status: "手配中",
+    project: "PCキッティング",
+    vendor: "○○運送",
+    dispatchDate: "2026/07/20",
+    status: "手配済",
   },
   {
     id: 2,
     employee: "佐藤 花子",
-    destination: "東京営業所",
-    dispatchDate: "2026-07-24",
-    status: "完了",
-  },
-  {
-    id: 3,
-    employee: "鈴木 一郎",
-    destination: "名古屋支店",
-    dispatchDate: "2026-07-28",
+    project: "LAN配線工事",
+    vendor: "△△物流",
+    dispatchDate: "2026/07/22",
     status: "未手配",
   },
 ];
+
+export function getDispatches(): Dispatch[] {
+  if (typeof window === "undefined") {
+    return dispatches;
+  }
+
+  const saved = localStorage.getItem("dispatches");
+
+  if (!saved) {
+    return dispatches;
+  }
+
+  return JSON.parse(saved);
+}
+
+export function saveDispatches(data: Dispatch[]) {
+  localStorage.setItem("dispatches", JSON.stringify(data));
+}
