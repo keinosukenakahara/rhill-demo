@@ -20,7 +20,16 @@ export default function Sidebar() {
               href="/projects"
               className="block rounded px-3 py-2 hover:bg-gray-700"
             >
-              📦 配置管理
+              📦 案件管理
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/placements"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              👥 配置管理
             </Link>
           </li>
 

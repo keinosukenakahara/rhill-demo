@@ -1,32 +1,12 @@
 "use client";
 
+import { deliveries } from "@/lib/deliveries";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function DeliveryPage() {
 
-  const deliveries = [
-    {
-      id: 1,
-      employee: "山田 太郎",
-      destination: "大阪市北区",
-      date: "2026/07/20",
-      status: "配送予定",
-    },
-    {
-      id: 2,
-      employee: "佐藤 花子",
-      destination: "神戸市中央区",
-      date: "2026/07/21",
-      status: "配送中",
-    },
-    {
-      id: 3,
-      employee: "鈴木 一郎",
-      destination: "京都市中京区",
-      date: "2026/07/22",
-      status: "完了",
-    },
-  ];
+
 
   const [keyword, setKeyword] = useState("");
 
@@ -108,6 +88,10 @@ export default function DeliveryPage() {
                 状態
               </th>
 
+              <th className="text-left p-3">
+                操作
+              </th>
+
             </tr>
 
           </thead>
@@ -126,7 +110,12 @@ export default function DeliveryPage() {
 
 
                 <td className="p-3">
-                  {delivery.id}
+                  <Link
+                    href={`/delivery/${delivery.id}`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    {delivery.id}
+                  </Link>
                 </td>
 
 
@@ -164,21 +153,37 @@ export default function DeliveryPage() {
 
                 </td>
 
+                <td className="p-3">
 
+                  <div className="flex gap-3">
+
+                    <Link
+                      href={`/delivery/${delivery.id}`}
+                      className="text-blue-600 hover:underline"
+                    >
+                      詳細
+                    </Link>
+
+                    <Link
+                      href={`/delivery/${delivery.id}/edit`}
+                      className="text-green-600 hover:underline"
+                    >
+                      編集
+                    </Link>
+
+                    <button
+                      className="text-red-600 hover:underline"
+                    >
+                      削除
+                    </button>
+
+                  </div>
+                </td>
               </tr>
-
             ))}
-
-
           </tbody>
-
-
         </table>
-
-
       </div>
-
-
     </main>
   );
 }
