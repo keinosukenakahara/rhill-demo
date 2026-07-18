@@ -1,18 +1,45 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import {
+  Dispatch,
+  getDispatches,
+  saveDispatches,
+} from "@/lib/dispatches";
 
 export default function NewDispatchPage() {
   const [employee, setEmployee] = useState("");
   const [project, setProject] = useState("");
   const [vendor, setVendor] = useState("");
   const [dispatchDate, setDispatchDate] = useState("");
-
+  
+  const router = useRouter();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    alert("手配を登録しました。（次のStepで保存機能を追加します）");
+    if (!employee || !project || !vendor || !dispatchDate) {
+      alert("すべて入力してください。");
+      return;
+    }
+
+    const list = getDispatches();
+
+    const newDispatch: Dispatch = {
+      id: Date.now(),
+      employee,
+      project,
+      vendor,
+      dispatchDate,
+      status: "未手配",
+    };
+
+    list.push(newDispatch);
+
+    saveDispatches(list);
+    router.refresh();
+    router.push("/dispatch");
   };
 
   return (

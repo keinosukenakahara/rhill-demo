@@ -1,7 +1,45 @@
+"use client";
+
 import Link from "next/link";
-import { dispatches } from "@/lib/dispatches";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import {
+  Dispatch,
+  getDispatches,
+  saveDispatches,
+} from "@/lib/dispatches";
 
 export default function DispatchPage() {
+  const [dispatches, setDispatches] = useState<Dispatch[]>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    setDispatches(getDispatches());
+  }, []);
+
+  const handleDelete = (id: number) => {
+    const ok = window.confirm(
+      "この手配を削除しますか？"
+    );
+
+    if (!ok) {
+      return;
+    }
+
+    const current = getDispatches();
+
+    const updated = current.filter(
+      (item) => item.id !== id
+    );
+
+    saveDispatches(updated);
+
+    setDispatches(updated);
+
+    router.refresh();
+  };
+
+
   return (
     <main className="p-8">
       <div className="flex justify-between items-center mb-6">
@@ -26,6 +64,7 @@ export default function DispatchPage() {
               <th className="p-3 text-left">配送業者</th>
               <th className="p-3 text-left">手配日</th>
               <th className="p-3 text-left">ステータス</th>
+              <th className="p-3 text-center">操作</th>
             </tr>
           </thead>
 
@@ -47,6 +86,27 @@ export default function DispatchPage() {
                     {item.status}
                   </span>
                 </td>
+
+                <td className="p-3">
+                  <div className="flex gap-2">
+                    
+                  <Link
+                    href={`/dispatch/${item.id}/edit`}
+                    className="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
+                  >
+                    ✏️ 編集
+                  </Link>
+
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600"
+                    >
+                      🗑️ 削除
+                    </button>
+                    
+                  </div>
+                </td>
+
               </tr>
             ))}
           </tbody>

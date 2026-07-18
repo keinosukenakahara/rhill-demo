@@ -1,129 +1,147 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter, useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import {
+  Dispatch,
+  getDispatches,
+  saveDispatches,
+} from "@/lib/dispatches";
+export default function EditDispatchPage() {
 
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import { placements } from "@/lib/placements";
-
-export default function PlacementEditPage() {
- const router = useRouter();
   const params = useParams();
+  const router = useRouter();
+  const id = Number(params.id);
 
-  const placement = placements.find(
-    (p) => p.id === Number(params.id)
-  );
+  const [dispatch, setDispatch] = useState<Dispatch | null>(null);
+  const [employee, setEmployee] = useState("");
+  const [project, setProject] = useState("");
+  const [vendor, setVendor] = useState("");
+  const [dispatchDate, setDispatchDate] = useState("");
 
-  if (!placement) {
-    return <div>配置データが見つかりません。</div>;
-  }
+  useEffect(() => {
 
-  const [employee, setEmployee] = useState(placement.employee);
-const [destination, setDestination] = useState(placement.destination);
-const [startDate, setStartDate] = useState(placement.startDate);
-const [status, setStatus] = useState(placement.status);
+    const list = getDispatches();
 
-const [success, setSuccess] = useState(false);
+    const target = list.find(
+      (item) => item.id === id
+    );
 
-const handleUpdate = () => {
-  setSuccess(true);
+    if (target) {
+      setDispatch(target);
 
-    setTimeout(() => {
-      router.push("/placements");
-    }, 1000);
+      setEmployee(target.employee);
+      setProject(target.project);
+      setVendor(target.vendor);
+      setDispatchDate(target.dispatchDate);
+    }
+
+  }, [id]);
+
+
+    const handleSave = () => {
+
+    const list = getDispatches();
+
+    const updated = list.map((item) =>
+      item.id === id
+        ? {
+            ...item,
+            employee,
+            project,
+            vendor,
+            dispatchDate,
+          }
+        : item
+    );
+
+    saveDispatches(updated);
+
+    router.push("/dispatch");
   };
 
+
+  if (!dispatch) {
+    return (
+      <main className="p-8">
+        データを読み込み中です...
+      </main>
+    );
+  }
+
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Header />
+    <main className="max-w-2xl mx-auto p-8">
 
-      <div className="flex">
-        <Sidebar />
+      <h1 className="text-3xl font-bold mb-6">
+        ✏️ 手配編集
+      </h1>
 
-        <main className="flex-1 p-8">
-          <h2 className="mb-6 text-2xl font-bold">
-            配置編集
-          </h2>
 
-          {success && (
-            <div className="mb-4 rounded-lg border border-green-400 bg-green-100 px-4 py-3 text-green-700">
-              ✅ 配置情報を更新しました。
-            </div>
-          )}
+      <div className="rounded-lg border bg-white p-6 shadow">
 
-          <div className="rounded-lg bg-white p-6 shadow space-y-4">
+        <div className="mb-4">
+          <label className="block mb-2 font-medium">
+            担当者
+          </label>
 
-            <div>
-              <label className="block mb-1 font-medium">
-                担当者
-              </label>
-              <input
-                value={employee}
-                onChange={(e) => setEmployee(e.target.value)}
-                className="w-full rounded border px-3 py-2"
-              />
-            </div>
+          <input
+            value={dispatch.employee}
+            readOnly
+            className="w-full rounded border p-2 bg-gray-100"
+          />
+        </div>
 
-            <div>
-              <label className="block mb-1 font-medium">
-                配置先
-              </label>
-              <input
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                className="w-full rounded border px-3 py-2"
-              />
-            </div>
 
-            <div>
-              <label className="block mb-1 font-medium">
-                開始日
-              </label>
-              <input
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  className="w-full rounded border px-3 py-2"
-              />
-            </div>
+        <div className="mb-4">
+          <label className="block mb-2 font-medium">
+            案件名
+          </label>
 
-            <div>
-              <label className="block mb-1 font-medium">
-                ステータス
-              </label>
-              <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                className="w-full rounded border px-3 py-2"
-              >
-                <option>配置予定</option>
-                <option>配置中</option>
-                <option>完了</option>
-              </select>
-            </div>
+          <input
+            value={dispatch.project}
+            readOnly
+            className="w-full rounded border p-2 bg-gray-100"
+          />
+        </div>
 
-          </div>
 
-          <div className="mt-6 flex gap-3">
+        <div className="mb-4">
+          <label className="block mb-2 font-medium">
+            配送業者
+          </label>
 
-            <button
-              className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-            >
-              保存
-            </button>
+          <input
+            value={dispatch.vendor}
+            readOnly
+            className="w-full rounded border p-2 bg-gray-100"
+          />
+        </div>
 
-            <button
-              onClick={handleUpdate}
-              className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-            >
-              更新
-            </button>
-          </div>
 
-        </main>
+        <div>
+          <label className="block mb-2 font-medium">
+            手配日
+          </label>
+
+          <input
+            value={dispatch.dispatchDate}
+            readOnly
+            className="w-full rounded border p-2 bg-gray-100"
+          />
+        </div>
+
       </div>
-    </div>
+
+
+      <Link
+        href="/dispatch"
+        className="inline-block mt-6 rounded bg-gray-600 px-4 py-2 text-white"
+      >
+        ← 手配一覧へ戻る
+      </Link>
+
+    </main>
   );
 }
