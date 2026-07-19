@@ -96,11 +96,23 @@ export default function EditProjectPage() {
           <select
             className="w-full border rounded-lg px-3 py-2"
             value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            onChange={(e) =>
+              setStatus(
+                e.target.value as "未着手" | "進行中" | "完了"
+              )
+            }
           >
-            <option>未着手</option>
-            <option>進行中</option>
-            <option>完了</option>
+            <option value="未着手">
+              未着手
+            </option>
+
+            <option value="進行中">
+              進行中
+            </option>
+
+            <option value="完了">
+              完了
+            </option>
           </select>
         </div>
 
