@@ -29,3 +29,24 @@ export const projects: Project[] = [
     start: "2026-08-01",
   },
 ];
+
+export function getProjects(): Project[] {
+  if (typeof window === "undefined") {
+    return projects;
+  }
+
+  const saved = localStorage.getItem("projects");
+
+  if (!saved) {
+    return projects;
+  }
+
+  return JSON.parse(saved);
+}
+
+export function saveProjects(data: Project[]) {
+  localStorage.setItem(
+    "projects",
+    JSON.stringify(data)
+  );
+}

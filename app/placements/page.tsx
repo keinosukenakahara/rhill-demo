@@ -1,12 +1,45 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { placements } from "@/lib/placements";
+import { useEffect, useState } from "react";
+import {
+  Placement,
+  getPlacements,
+  savePlacements,
+} from "@/lib/placements";
 
 export default function PlacementsPage() {
+
+  const [placements, setPlacements] =
+  useState<Placement[]>([]);
+
+  useEffect(() => {
+    setPlacements(getPlacements());
+  }, []);
+  
+  const router = useRouter();
+
+  const handleDelete = (id: number) => {
+    const ok = window.confirm("この配置を削除しますか？");
+
+    if (!ok) return;
+
+    const updated = getPlacements().filter(
+      (item) => item.id !== id
+    );
+
+    savePlacements(updated);
+
+    setPlacements(updated);
+
+    router.refresh();
+  };
+
   return (
+   
     <div className="min-h-screen bg-gray-100">
       <Header />
 
@@ -79,6 +112,13 @@ export default function PlacementsPage() {
                         編集
                       </Link>
 
+                      <button
+                        onClick={() => handleDelete(placement.id)}
+                        className="text-red-600 hover:underline"
+                      >
+                        削除
+                      </button>
+
                     </div>
                   </td>
                   
@@ -90,5 +130,9 @@ export default function PlacementsPage() {
         </main>
       </div>
     </div>
+
+
+
   );
 }
+

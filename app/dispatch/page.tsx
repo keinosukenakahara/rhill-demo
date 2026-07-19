@@ -68,48 +68,56 @@ export default function DispatchPage() {
             </tr>
           </thead>
 
-          <tbody>
-            {dispatches.map((item) => (
-              <tr key={item.id} className="border-t">
-                <td className="p-3">{item.employee}</td>
-                <td className="p-3">{item.project}</td>
-                <td className="p-3">{item.vendor}</td>
-                <td className="p-3">{item.dispatchDate}</td>
-                <td className="p-3">
-                  <span
-                    className={`rounded-full px-3 py-1 text-sm ${
-                      item.status === "手配済"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}
-                  >
-                    {item.status}
-                  </span>
-                </td>
+        <tbody>
+          {dispatches.map((item) => (
+            <tr key={item.id} className="border-t">
+              <td className="p-3">{item.employee}</td>
 
-                <td className="p-3">
-                  <div className="flex gap-2">
-                    
+              <td className="p-3">{item.project}</td>
+
+              <td className="p-3">{item.vendor}</td>
+
+              <td className="p-3">{item.dispatchDate}</td>
+
+              <td className="p-3">
+                <span
+                  className={`rounded-full px-3 py-1 text-sm ${
+                    item.status === "手配済"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-yellow-100 text-yellow-700"
+                  }`}
+                >
+                  {item.status}
+                </span>
+              </td>
+
+              <td className="p-3">
+                <div className="flex gap-2">
+                  <Link
+                    href={`/dispatch/${item.id}`}
+                    className="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
+                  >
+                    📄 詳細
+                  </Link>
+
                   <Link
                     href={`/dispatch/${item.id}/edit`}
-                    className="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
+                    className="rounded bg-green-500 px-3 py-1 text-white hover:bg-green-600"
                   >
                     ✏️ 編集
                   </Link>
 
-                    <button
-                      onClick={() => handleDelete(item.id)}
-                      className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600"
-                    >
-                      🗑️ 削除
-                    </button>
-                    
-                  </div>
-                </td>
-
-              </tr>
-            ))}
-          </tbody>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600"
+                  >
+                    🗑️ 削除
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
         </table>
       </div>
 

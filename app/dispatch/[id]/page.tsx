@@ -1,72 +1,174 @@
+"use client";
+
 import Link from "next/link";
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import { dispatches } from "@/lib/dispatches";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import {
+  Dispatch,
+  getDispatches,
+  saveDispatches,
+} from "@/lib/dispatches";
 
-type Props = {
-  params: Promise<{
-    id: string;
-  }>;
-};
 
-export default async function DispatchDetailPage({
-  params,
-}: Props) {
-  const { id } = await params;
+export default function DispatchDetailPage() {
 
-  const dispatch  =dispatches.find(
-    (p) => p.id === Number(id)
-  );
+  const params = useParams();
+  const router = useRouter();
 
-  if (!dispatch ) {
-    return <div>手配データが見つかりません。</div>;
+  const id = Number(params.id);
+
+  const [dispatch, setDispatch] =
+    useState<Dispatch | null>(null);
+
+
+  useEffect(() => {
+
+    const data = getDispatches();
+
+    const target = data.find(
+      (item) => item.id === id
+    );
+
+    setDispatch(target ?? null);
+
+  }, [id]);
+
+
+
+  if (!dispatch) {
+    return (
+      <div className="p-6">
+        手配データがありません。
+      </div>
+    );
   }
 
+
+
+  const handleDelete = () => {
+
+    const ok = window.confirm(
+      "この手配を削除しますか？"
+    );
+
+
+    if (!ok) return;
+
+
+    const data = getDispatches();
+
+
+    const newData =
+      data.filter(
+        (item) => item.id !== id
+      );
+
+
+    saveDispatches(newData);
+
+
+    router.push("/dispatch");
+
+  };
+
+
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Header />
 
-      <div className="flex">
-        <Sidebar />
+    <div className="p-6">
 
-        <main className="flex-1 p-8">
-          <h2 className="mb-6 text-2xl font-bold">
-            手配詳細
-          </h2>
+      <h1 className="text-2xl font-bold mb-6">
+        手配詳細
+      </h1>
 
-          <div className="rounded-lg bg-white p-6 shadow space-y-4">
-            <p><strong>ID：</strong>{dispatch.id}</p>
-            <p><strong>担当者：</strong>{dispatch.employee}</p>
-            <p><strong>配置先：</strong>{dispatch.destination}</p>
-            <p><strong>開始日：</strong>{dispatch.dispatchDate}</p>
-            <p><strong>ステータス：</strong>{dispatch.status}</p>
-          </div>
 
-          <div className="mt-6 flex items-center gap-3">
+      <div className="bg-white rounded-lg shadow p-6 space-y-4">
 
-            <Link
-              href={`/dispatch/${dispatch.id}/edit`}
-              className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-            >
-              ✏️ 編集
-            </Link>
 
-            <button
-              type="button"
-              className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
-            >
-              🗑️ 削除
-            </button>
+        <div>
+          <span className="font-bold">
+            手配ID：
+          </span>
+          {dispatch.id}
+        </div>
 
-            <Link
-              href="/placements"
-              className="rounded bg-gray-600 px-4 py-2 text-white hover:bg-gray-700"
-            >
-              ← 配置一覧へ戻る
-            </Link>
-          </div>
-        </main>
+
+        <div>
+          <span className="font-bold">
+            社員名：
+          </span>
+          {dispatch.employee}
+        </div>
+
+
+        <div>
+          <span className="font-bold">
+            案件名：
+          </span>
+          {dispatch.project}
+        </div>
+
+
+        <div>
+          <span className="font-bold">
+            ステータス：
+          </span>
+          {dispatch.status}
+        </div>
+
+        <div>
+          <span className="font-bold">
+            手配先：
+          </span>
+          {dispatch.vendor}
+        </div>
+
+
+        <div>
+          <span className="font-bold">
+            手配日：
+          </span>
+          {dispatch.dispatchDate}
+        </div>
+
+
+
+        <div className="flex gap-3 pt-4">
+
+
+          <Link
+            href={`/dispatch/${dispatch.id}/edit`}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            編集
+          </Link>
+
+
+
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 text-white px-4 py-2 rounded"
+          >
+            削除
+          </button>
+
+
+        </div>
+
+
       </div>
+
+
+      <Link
+        href="/dispatch"
+        className="inline-block mt-6 text-blue-600"
+      >
+        ← 手配一覧へ戻る
+      </Link>
+
+
     </div>
+
   );
+
 }

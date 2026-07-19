@@ -2,8 +2,23 @@ import Link from "next/link";
 import DashboardCard from "@/components/DashboardCard";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import { getProjects } from "@/lib/projects";
+import { getPlacements } from "@/lib/placements";
+import { getDispatches } from "@/lib/dispatches";
 
 export default function Home() {
+
+  const projects = getProjects();
+  const placements = getPlacements();
+  const dispatches = getDispatches();
+
+  const completedDispatches = dispatches.filter(
+    (d) => d.status === "手配済"
+  ).length;
+
+  const waitingDispatches = dispatches.filter(
+    (d) => d.status === "未手配"
+  ).length;
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -29,7 +44,7 @@ export default function Home() {
               <Link href="/projects">
                 <DashboardCard
                   title="配置管理システム"
-                  value="案件・配置"
+                  value={`案件 ${projects.length}件 / 配置 ${placements.length}件`}
                   icon="📦"
                   change="案件登録・編集・配置管理"
                 />
@@ -46,11 +61,11 @@ export default function Home() {
 
               <Link href="/dispatch">
                 <DashboardCard
-                    title="手配管理システム"
-                    value="手配管理"
-                    icon="📋"
-                    change="案件手配・進捗管理"
-                />
+                  title="手配管理システム"
+                  value={`${dispatches.length}件`}
+                  icon="📋"
+                  change={`手配済 ${completedDispatches}件 / 未手配 ${waitingDispatches}件`}
+                  />
               </Link>
 
               <DashboardCard

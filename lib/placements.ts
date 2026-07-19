@@ -29,3 +29,24 @@ export const placements: Placement[] = [
     status: "完了",
   },
 ];
+
+export function getPlacements(): Placement[] {
+  if (typeof window === "undefined") {
+    return placements;
+  }
+
+  const saved = localStorage.getItem("placements");
+
+  if (!saved) {
+    return placements;
+  }
+
+  return JSON.parse(saved);
+}
+
+export function savePlacements(data: Placement[]) {
+  localStorage.setItem(
+    "placements",
+    JSON.stringify(data)
+  );
+}

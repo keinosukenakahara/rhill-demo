@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
@@ -8,140 +7,206 @@ import {
   getDispatches,
   saveDispatches,
 } from "@/lib/dispatches";
-export default function EditDispatchPage() {
+
+
+export default function DispatchEditPage() {
 
   const params = useParams();
   const router = useRouter();
+
   const id = Number(params.id);
 
-  const [dispatch, setDispatch] = useState<Dispatch | null>(null);
-  const [employee, setEmployee] = useState("");
-  const [project, setProject] = useState("");
-  const [vendor, setVendor] = useState("");
-  const [dispatchDate, setDispatchDate] = useState("");
+
+  const [dispatch, setDispatch] =
+    useState<Dispatch | null>(null);
+
+
 
   useEffect(() => {
 
-    const list = getDispatches();
+    const data = getDispatches();
 
-    const target = list.find(
+    const target = data.find(
       (item) => item.id === id
     );
 
-    if (target) {
-      setDispatch(target);
-
-      setEmployee(target.employee);
-      setProject(target.project);
-      setVendor(target.vendor);
-      setDispatchDate(target.dispatchDate);
-    }
+    setDispatch(target ?? null);
 
   }, [id]);
 
 
-    const handleSave = () => {
-
-    const list = getDispatches();
-
-    const updated = list.map((item) =>
-      item.id === id
-        ? {
-            ...item,
-            employee,
-            project,
-            vendor,
-            dispatchDate,
-          }
-        : item
-    );
-
-    saveDispatches(updated);
-
-    router.push("/dispatch");
-  };
-
 
   if (!dispatch) {
+
     return (
-      <main className="p-8">
-        データを読み込み中です...
-      </main>
+      <div className="p-6">
+        手配データがありません。
+      </div>
     );
+
   }
 
 
-  return (
-    <main className="max-w-2xl mx-auto p-8">
 
-      <h1 className="text-3xl font-bold mb-6">
-        ✏️ 手配編集
+  const handleSave = () => {
+
+
+    const data = getDispatches();
+
+
+    const newData =
+      data.map((item) =>
+        item.id === id
+          ? dispatch
+          : item
+      );
+
+
+    saveDispatches(newData);
+
+
+    alert("手配情報を更新しました");
+
+
+    router.push(
+      `/dispatch/${id}`
+    );
+
+  };
+
+
+
+  return (
+
+    <div className="p-6">
+
+
+      <h1 className="text-2xl font-bold mb-6">
+        手配編集
       </h1>
 
 
-      <div className="rounded-lg border bg-white p-6 shadow">
 
-        <div className="mb-4">
-          <label className="block mb-2 font-medium">
-            担当者
-          </label>
-
-          <input
-            value={dispatch.employee}
-            readOnly
-            className="w-full rounded border p-2 bg-gray-100"
-          />
-        </div>
-
-
-        <div className="mb-4">
-          <label className="block mb-2 font-medium">
-            案件名
-          </label>
-
-          <input
-            value={dispatch.project}
-            readOnly
-            className="w-full rounded border p-2 bg-gray-100"
-          />
-        </div>
-
-
-        <div className="mb-4">
-          <label className="block mb-2 font-medium">
-            配送業者
-          </label>
-
-          <input
-            value={dispatch.vendor}
-            readOnly
-            className="w-full rounded border p-2 bg-gray-100"
-          />
-        </div>
+      <div className="bg-white shadow rounded-lg p-6 space-y-4">
 
 
         <div>
-          <label className="block mb-2 font-medium">
-            手配日
+
+          <label className="block font-bold mb-1">
+            社員名
           </label>
 
           <input
-            value={dispatch.dispatchDate}
-            readOnly
-            className="w-full rounded border p-2 bg-gray-100"
+
+            value={dispatch.employee}
+
+            onChange={(e)=>
+              setDispatch({
+                ...dispatch,
+                employee:e.target.value
+              })
+            }
+
+            className="border rounded px-3 py-2 w-full"
+
           />
+
         </div>
+
+
+
+
+        <div>
+
+          <label className="block font-bold mb-1">
+            案件名
+          </label>
+
+
+          <input
+
+            value={dispatch.project}
+
+            onChange={(e)=>
+              setDispatch({
+                ...dispatch,
+                project:e.target.value
+              })
+            }
+
+
+            className="border rounded px-3 py-2 w-full"
+
+          />
+
+
+        </div>
+
+
+
+
+        <div>
+
+          <label className="block font-bold mb-1">
+            ステータス
+          </label>
+
+
+          <select
+
+            value={dispatch.status}
+
+            onChange={(e)=>
+              setDispatch({
+                ...dispatch,
+                status:e.target.value
+              })
+            }
+
+
+            className="border rounded px-3 py-2 w-full"
+
+          >
+
+            <option>
+              配置予定
+            </option>
+
+            <option>
+              配置済
+            </option>
+
+            <option>
+              完了
+            </option>
+
+
+          </select>
+
+
+        </div>
+
+
+
+
+        <button
+
+          onClick={handleSave}
+
+          className="bg-green-600 text-white px-5 py-2 rounded"
+
+        >
+
+          保存
+
+        </button>
+
 
       </div>
 
 
-      <Link
-        href="/dispatch"
-        className="inline-block mt-6 rounded bg-gray-600 px-4 py-2 text-white"
-      >
-        ← 手配一覧へ戻る
-      </Link>
+    </div>
 
-    </main>
   );
+
 }
