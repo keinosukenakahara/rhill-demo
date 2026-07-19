@@ -1,16 +1,20 @@
 type Props = {
-  title: string;
-  value: string;
-  icon: string;
-  change: string;
+  title:string;
+  value:string;
+  description?:string;
+  icon?:string;
+  change?:string;
 };
+
 
 export default function DashboardCard({
   title,
   value,
+  description,
   icon,
   change,
 }: Props) {
+
   return (
     <div className="bg-white rounded-lg shadow p-6">
 

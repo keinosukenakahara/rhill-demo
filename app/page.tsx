@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import { getProjects } from "@/lib/projects";
 import { getPlacements } from "@/lib/placements";
 import { getDispatches } from "@/lib/dispatches";
+import { dashboardData } from "@/lib/dashboard";
 
 export default function Home() {
 
@@ -102,6 +103,56 @@ export default function Home() {
                   icon="📈"
                   change="分析・マスタ・権限管理"
               />
+
+          <DashboardCard
+
+          title="スタッフ数"
+
+          value={`${dashboardData.staffs}名`}
+
+          description="稼働スタッフ"
+
+          />
+
+
+          <DashboardCard
+
+          title="件数承認待ち"
+
+          value={`${dashboardData.pendingCounts}件`}
+
+          description="確認が必要"
+
+          />
+
+
+          <DashboardCard
+
+          title="支払確定"
+
+          value={`${dashboardData.paymentDone}名`}
+
+          description="今月確定"
+
+          />
+
+
+          <DashboardCard
+
+          title="前払い申請"
+
+          value={`${dashboardData.advanceRequests}件`}
+
+          description="承認待ち"
+
+          />
+
+
+
+
+
+
+
 
             </div>
 
