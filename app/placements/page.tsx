@@ -50,6 +50,21 @@ export default function PlacementsPage() {
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-bold">配置管理</h2>
 
+
+            <div className="mb-6 rounded-lg bg-green-50 p-4">
+
+              <h3 className="mb-2 font-bold text-green-700">
+                👥 配置管理について
+              </h3>
+
+              <p className="leading-7 text-gray-700">
+                作業担当者や配置先を管理する画面です。
+                案件情報をもとに配置計画を作成し、
+                作業開始までの状況を確認できます。
+              </p>
+
+            </div>
+
             <Link
               href="/placements/new"
               className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"

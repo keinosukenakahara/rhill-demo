@@ -6,8 +6,6 @@ import { useState } from "react";
 
 export default function DeliveryPage() {
 
-
-
   const [keyword, setKeyword] = useState("");
 
   const filteredDeliveries = deliveries.filter((delivery) =>
@@ -25,6 +23,20 @@ export default function DeliveryPage() {
       <h1 className="text-3xl font-bold mb-6">
         🚚 宅配業務管理
       </h1>
+
+      <div className="mb-6 rounded-lg bg-purple-50 p-4">
+
+        <h3 className="mb-2 font-bold text-purple-700">
+          📦 宅配管理について
+        </h3>
+
+        <p className="leading-7 text-gray-700">
+          作業完了後の商品・機器配送状況を
+          管理する画面です。
+          配送予定や履歴を確認できます。
+        </p>
+
+      </div>
 
     <div className="mb-4 text-gray-700">
 

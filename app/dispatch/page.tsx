@@ -47,6 +47,21 @@ export default function DispatchPage() {
           🚚 手配管理
         </h1>
 
+      <div className="mb-6 rounded-lg bg-yellow-50 p-4">
+
+        <h3 className="mb-2 font-bold text-yellow-700">
+          🚚 手配管理について
+        </h3>
+
+        <p className="leading-7 text-gray-700">
+          作業に必要な人員・車両・協力会社などの
+          手配状況を管理する画面です。
+          手配済・未手配の状態を確認できます。
+        </p>
+
+      </div>
+
+
         <Link
           href="/dispatch/new"
           className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"

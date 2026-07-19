@@ -20,6 +20,20 @@ export default function Home() {
     (d) => d.status === "未手配"
   ).length;
 
+  const plannedPlacements = placements.filter(
+    (p) => p.status === "配置予定"
+  ).length;
+
+
+  const activePlacements = placements.filter(
+    (p) => p.status === "配置中"
+  ).length;
+
+
+  const completedPlacements = placements.filter(
+    (p) => p.status === "完了"
+  ).length;
+
   return (
     <div className="min-h-screen bg-gray-100">
 
@@ -32,27 +46,33 @@ export default function Home() {
           <main className="flex-1 p-8">
 
             <h2 className="text-3xl font-bold mb-2">
-              RHILL 業務管理システム
+              業務管理システム
             </h2>
 
+            <p className="text-gray-600 mb-4">
+              案件登録から配置・手配・配送までの業務フローを
+              一元管理する業務管理システムです。
+            </p>
+
             <p className="text-gray-600 mb-8">
-              各業務システムへアクセスするポータル画面です。
+              本画面はレビュー版ポータルとして、
+              各管理機能へアクセスできます。
             </p>
 
             <div className="grid grid-cols-2 gap-6">
 
               <Link href="/projects">
                 <DashboardCard
-                  title="配置管理システム"
-                  value={`案件 ${projects.length}件 / 配置 ${placements.length}件`}
-                  icon="📦"
-                  change="案件登録・編集・配置管理"
+                  title="案件・配置管理"
+                  value={`案件 ${projects.length}件`}
+                  icon="👥"
+                  change={`配置予定 ${plannedPlacements}件 / 配置中 ${activePlacements}件`}
                 />
               </Link>
 
               <Link href="/delivery">
                 <DashboardCard
-                    title="宅配業務管理"
+                    title="配送管理"
                     value="配送管理"
                     icon="🚚"
                     change="配送状況・配送履歴"
@@ -61,12 +81,20 @@ export default function Home() {
 
               <Link href="/dispatch">
                 <DashboardCard
-                  title="手配管理システム"
+                  title="手配管理"
                   value={`${dispatches.length}件`}
                   icon="📋"
                   change={`手配済 ${completedDispatches}件 / 未手配 ${waitingDispatches}件`}
                   />
               </Link>
+
+
+              <DashboardCard
+                title="拡張機能（予定）"
+                value="Future"
+                icon="⚙️"
+                change="ログイン・権限・分析・DB連携"
+              />
 
               <DashboardCard
                   title="今後追加予定"

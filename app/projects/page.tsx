@@ -65,6 +65,18 @@ export default function ProjectsPage() {
               案件一覧
             </h1>
 
+            <div className="mb-6 rounded-lg bg-blue-50 p-4">
+              <h3 className="mb-2 font-bold text-blue-700">
+                📁 案件管理について
+              </h3>
+
+              <p className="leading-7 text-gray-700">
+                案件情報を登録・管理する画面です。
+                登録された案件は配置計画・手配管理へ連携され、
+                業務進行状況を一元管理できます。
+              </p>
+            </div>
+
             <Link
               href="/projects/new"
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
