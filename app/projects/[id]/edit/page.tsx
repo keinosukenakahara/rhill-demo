@@ -19,7 +19,9 @@ export default function EditProjectPage() {
   const [person, setPerson] = useState(project.employee);
   const [name, setName] = useState(project.project);
   const [startDate, setStartDate] = useState(project.start);
-  const [status, setStatus] = useState(project.status);
+  const [status, setStatus] = useState<
+  "未着手" | "進行中" | "完了"
+>("未着手");
   const [success, setSuccess] = useState(false);
 
   const handleUpdate = () => {
@@ -29,6 +31,11 @@ export default function EditProjectPage() {
       router.push("/projects");
     }, 1000);
   };
+
+  type Status =
+  | "未着手"
+  | "進行中"
+  | "完了";
 
   return (
     <div className="max-w-2xl mx-auto p-8">
