@@ -73,9 +73,9 @@ export default function PlacementEditPage() {
       <div className="flex">
         <Sidebar />
 
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-4 md:p-8">
 
-          <h2 className="mb-8 text-3xl font-bold">
+          <h2 className="mb-6 text-xl font-bold md:text-3xl">
             配置編集
           </h2>
 
@@ -85,7 +85,7 @@ export default function PlacementEditPage() {
             </div>
           )}
 
-          <div className="max-w-2xl rounded-xl bg-white p-8 shadow space-y-6">
+         <div className="max-w-2xl rounded-xl bg-white p-4 shadow space-y-6 md:p-8">
 
             <div>
               <label className="mb-2 block font-semibold">
