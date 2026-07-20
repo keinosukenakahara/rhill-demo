@@ -1,52 +1,53 @@
-export type Placement = {
+export interface Placement {
   id: number;
   employee: string;
   destination: string;
   startDate: string;
   status: string;
-};
+}
 
-export const placements: Placement[] = [
+const initialPlacements: Placement[] = [
   {
     id: 1,
     employee: "山田 太郎",
-    destination: "東京営業所",
+    destination: "大阪営業所",
     startDate: "2026-07-20",
     status: "配置予定",
   },
   {
     id: 2,
     employee: "佐藤 花子",
-    destination: "大阪支店",
-    startDate: "2026-07-25",
+    destination: "神戸営業所",
+    startDate: "2026-07-22",
     status: "配置中",
-  },
-  {
-    id: 3,
-    employee: "鈴木 一郎",
-    destination: "名古屋支店",
-    startDate: "2026-08-01",
-    status: "完了",
   },
 ];
 
+const STORAGE_KEY = "placements";
+
 export function getPlacements(): Placement[] {
   if (typeof window === "undefined") {
-    return placements;
+    return initialPlacements;
   }
 
-  const saved = localStorage.getItem("placements");
+  const data = localStorage.getItem(STORAGE_KEY);
 
-  if (!saved) {
-    return placements;
+  if (!data) {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(initialPlacements)
+    );
+    return initialPlacements;
   }
 
-  return JSON.parse(saved);
+  return JSON.parse(data);
 }
 
-export function savePlacements(data: Placement[]) {
+export function savePlacements(
+  placements: Placement[]
+) {
   localStorage.setItem(
-    "placements",
-    JSON.stringify(data)
+    STORAGE_KEY,
+    JSON.stringify(placements)
   );
 }

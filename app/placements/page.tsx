@@ -11,6 +11,7 @@ import {
   savePlacements,
 } from "@/lib/placements";
 
+
 export default function PlacementsPage() {
 
   const [placements, setPlacements] =
@@ -20,6 +21,18 @@ export default function PlacementsPage() {
     setPlacements(getPlacements());
   }, []);
   
+  function handleReset() {
+  if (!confirm("配置データを初期状態へ戻しますか？")) {
+    return;
+  }
+
+  localStorage.removeItem("placements");
+
+  router.refresh();
+
+  window.location.reload();
+}
+
   const router = useRouter();
 
   const handleDelete = (id: number) => {
@@ -71,6 +84,15 @@ export default function PlacementsPage() {
             >
               ＋ 新規登録
             </Link>
+
+            <button
+              onClick={handleReset}
+              className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+            >
+              🔄 開発データ初期化
+            </button>
+
+
           </div>
 
           <div className="overflow-hidden rounded-lg bg-white shadow">

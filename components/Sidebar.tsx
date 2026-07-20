@@ -52,47 +52,50 @@ export default function Sidebar() {
             </Link>
           </li>
 
-        <li>
-          <Link href="/shifts">
-            📅 稼働表・発注書
-          </Link>
-        </li>
+          <li>
+            <Link
+              href="/shifts"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              📅 稼働表・発注書
+            </Link>
+          </li>
 
-        <li>
-          <Link href="/counts">
-            📦 件数管理
-          </Link>
-        </li>
+          <li>
+            <Link
+              href="/counts"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              📦 件数管理
+            </Link>
+          </li>
 
-        <li>
-          <Link href="/payment">
-            📄 支払通知書
-          </Link>
-        </li>
+          <li>
+            <Link
+              href="/payment"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              📄 支払通知書
+            </Link>
+          </li>
 
-        <li>
-          <Link href="/advance">
-            💴 前払い管理
-          </Link>
-        </li>
+          <li>
+            <Link
+              href="/advance"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              💴 前払い管理
+            </Link>
+          </li>
 
-        <li>
-          <Link href="/staff">
-            👤 スタッフ管理
-          </Link>
-        </li>
-
-        <Link href="/counts">
-        📦 件数管理
-        </Link>
-
-        <Link href="/payment">
-          📄 支払通知書
-        </Link>
-
-        <Link href="/advance">
-          💴 前払い管理
-        </Link>
+          <li>
+            <Link
+              href="/staff"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              👤 スタッフ管理
+            </Link>
+          </li>
 
 
           <li>
