@@ -16,7 +16,7 @@ export default function DashboardCard({
 }: Props) {
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="rounded-lg bg-white p-4 shadow md:p-6">
 
       <div className="flex justify-between items-center">
 
@@ -30,7 +30,7 @@ export default function DashboardCard({
 
       </div>
 
-      <p className="text-3xl font-bold mt-4">
+      <p className="mt-3 text-2xl font-bold md:text-3xl">
         {value}
       </p>
 

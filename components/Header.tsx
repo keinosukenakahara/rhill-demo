@@ -1,11 +1,11 @@
 export default function Header() {
   return (
-    <header className="flex items-center justify-between bg-blue-700 text-white px-6 py-4 shadow">
+   <header className="flex items-center justify-between bg-blue-700 text-white px-4 md:px-6 py-4 shadow">
       <div>
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-lg md:text-2xl font-bold">
           RHILL 業務管理システム
         </h1>
-        <p className="text-sm text-blue-100">
+        <p className="hidden md:block text-sm text-blue-100">
           Business Management Portal
         </p>
       </div>

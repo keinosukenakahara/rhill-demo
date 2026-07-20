@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-gray-800 text-white min-h-screen p-4">
+   <aside className="hidden md:block w-64 bg-gray-800 text-white min-h-screen p-4">
 
       <div className="mb-6 text-xl font-bold">
         RHILL
