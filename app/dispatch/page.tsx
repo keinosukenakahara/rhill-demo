@@ -71,18 +71,18 @@ export default function DispatchPage() {
       </div>
 
       <div className="overflow-x-auto rounded-lg border bg-white shadow">
-        <table className="w-full">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="p-3 text-left">担当者</th>
-              <th className="p-3 text-left">案件</th>
-              <th className="p-3 text-left">配送業者</th>
-              <th className="p-3 text-left">手配日</th>
-              <th className="p-3 text-left">ステータス</th>
-              <th className="p-3 text-center">操作</th>
-            </tr>
-          </thead>
-
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="p-3 text-left">担当者</th>
+                <th className="p-3 text-left">案件</th>
+                <th className="p-3 text-left">配送業者</th>
+                <th className="p-3 text-left">手配日</th>
+                <th className="p-3 text-left">ステータス</th>
+                <th className="p-3 text-center">操作</th>
+              </tr>
+            </thead>
         <tbody>
           {dispatches.map((item) => (
             <tr key={item.id} className="border-t">
@@ -133,7 +133,8 @@ export default function DispatchPage() {
             </tr>
           ))}
         </tbody>
-        </table>
+          </table>
+        </div>
       </div>
 
       <Link

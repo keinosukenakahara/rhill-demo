@@ -73,128 +73,130 @@ export default function DeliveryPage() {
 
 
 
-        <table className="w-full border-collapse">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
 
 
-          <thead>
+            <thead>
 
-            <tr className="border-b bg-gray-50">
+              <tr className="border-b bg-gray-50">
 
-              <th className="text-left p-3">
-                配送ID
-              </th>
+                <th className="text-left p-3">
+                  配送ID
+                </th>
 
-              <th className="text-left p-3">
-                担当者
-              </th>
+                <th className="text-left p-3">
+                  担当者
+                </th>
 
-              <th className="text-left p-3">
-                配送先
-              </th>
+                <th className="text-left p-3">
+                  配送先
+                </th>
 
-              <th className="text-left p-3">
-                配送予定日
-              </th>
+                <th className="text-left p-3">
+                  配送予定日
+                </th>
 
-              <th className="text-left p-3">
-                状態
-              </th>
+                <th className="text-left p-3">
+                  状態
+                </th>
 
-              <th className="text-left p-3">
-                操作
-              </th>
+                <th className="text-left p-3">
+                  操作
+                </th>
 
-            </tr>
+              </tr>
 
-          </thead>
-
-
-
-          <tbody>
+            </thead>
 
 
-            {filteredDeliveries.map((delivery) => (
-              
-              <tr
-                key={delivery.id}
-                className="border-b hover:bg-gray-50"
-              >
+
+            <tbody>
 
 
-                <td className="p-3">
-                  <Link
-                    href={`/delivery/${delivery.id}`}
-                    className="text-blue-600 hover:underline"
-                  >
-                    {delivery.id}
-                  </Link>
-                </td>
+              {filteredDeliveries.map((delivery) => (
+                
+                <tr
+                  key={delivery.id}
+                  className="border-b hover:bg-gray-50"
+                >
 
 
-                <td className="p-3">
-                  {delivery.employee}
-                </td>
-
-
-                <td className="p-3">
-                  {delivery.destination}
-                </td>
-
-
-                <td className="p-3">
-                  {delivery.date}
-                </td>
-
-
-                <td className="p-3">
-
-                  <span
-                    className={`
-                      px-3 py-1 rounded-full text-sm
-                      ${
-                        delivery.status === "完了"
-                          ? "bg-green-100 text-green-700"
-                          : delivery.status === "配送中"
-                          ? "bg-blue-100 text-blue-700"
-                          : "bg-yellow-100 text-yellow-700"
-                      }
-                    `}
-                  >
-                    {delivery.status}
-                  </span>
-
-                </td>
-
-                <td className="p-3">
-
-                  <div className="flex gap-3">
-
+                  <td className="p-3">
                     <Link
                       href={`/delivery/${delivery.id}`}
                       className="text-blue-600 hover:underline"
                     >
-                      詳細
+                      {delivery.id}
                     </Link>
+                  </td>
 
-                    <Link
-                      href={`/delivery/${delivery.id}/edit`}
-                      className="text-green-600 hover:underline"
+
+                  <td className="p-3">
+                    {delivery.employee}
+                  </td>
+
+
+                  <td className="p-3">
+                    {delivery.destination}
+                  </td>
+
+
+                  <td className="p-3">
+                    {delivery.date}
+                  </td>
+
+
+                  <td className="p-3">
+
+                    <span
+                      className={`
+                        px-3 py-1 rounded-full text-sm
+                        ${
+                          delivery.status === "完了"
+                            ? "bg-green-100 text-green-700"
+                            : delivery.status === "配送中"
+                            ? "bg-blue-100 text-blue-700"
+                            : "bg-yellow-100 text-yellow-700"
+                        }
+                      `}
                     >
-                      編集
-                    </Link>
+                      {delivery.status}
+                    </span>
 
-                    <button
-                      className="text-red-600 hover:underline"
-                    >
-                      削除
-                    </button>
+                  </td>
 
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  <td className="p-3">
+
+                    <div className="flex gap-3">
+
+                      <Link
+                        href={`/delivery/${delivery.id}`}
+                        className="text-blue-600 hover:underline"
+                      >
+                        詳細
+                      </Link>
+
+                      <Link
+                        href={`/delivery/${delivery.id}/edit`}
+                        className="text-green-600 hover:underline"
+                      >
+                        編集
+                      </Link>
+
+                      <button
+                        className="text-red-600 hover:underline"
+                      >
+                        削除
+                      </button>
+
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </main>
   );

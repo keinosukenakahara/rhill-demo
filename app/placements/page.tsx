@@ -96,7 +96,8 @@ export default function PlacementsPage() {
           </div>
 
           <div className="overflow-hidden rounded-lg bg-white shadow">
-            <table className="w-full">
+            <div className="overflow-x-auto">
+             <table className="w-full">
               <thead className="bg-gray-100">
                 <tr>
                   <th className="px-4 py-3 text-left">ID</th>
@@ -162,7 +163,8 @@ export default function PlacementsPage() {
                   </tr>
                 ))}
               </tbody>
-            </table>
+             </table>
+            </div>    
           </div>
         </main>
       </div>
