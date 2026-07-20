@@ -26,8 +26,12 @@ export default function NewDispatchPage() {
 
     const list = getDispatches();
 
+         const nextId = list.length > 0
+          ? Math.max(...list.map((d)=>d.id))+1
+          : 1;
+
     const newDispatch: Dispatch = {
-      id: Date.now(),
+      id: nextId,
       employee,
       project,
       vendor,
@@ -43,14 +47,14 @@ export default function NewDispatchPage() {
   };
 
   return (
-    <main className="max-w-2xl mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">
+    <main className="max-w-2xl mx-auto p-4 md:p-8">
+      <h1 className="mb-6 text-xl font-bold md:text-3xl">
         🚚 新規手配
       </h1>
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-5 rounded-lg border bg-white p-6 shadow"
+        className="space-y-5 rounded-lg border bg-white p-4 shadow md:p-6"
       >
         <div>
           <label className="block mb-2 font-medium">

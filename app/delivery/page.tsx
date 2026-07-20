@@ -74,10 +74,8 @@ export default function DeliveryPage() {
 
 
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-
-
-            <thead>
+          <table className="w-full min-w-[700px] border-collapse">
+              <thead>
 
               <tr className="border-b bg-gray-50">
 
@@ -109,11 +107,7 @@ export default function DeliveryPage() {
 
             </thead>
 
-
-
             <tbody>
-
-
               {filteredDeliveries.map((delivery) => (
                 
                 <tr
@@ -168,8 +162,8 @@ export default function DeliveryPage() {
 
                   <td className="p-3">
 
-                    <div className="flex gap-3">
-
+                    <div className="flex flex-wrap gap-3">
+                      
                       <Link
                         href={`/delivery/${delivery.id}`}
                         className="text-blue-600 hover:underline"

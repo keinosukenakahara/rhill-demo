@@ -21,19 +21,19 @@ export default function PlacementsPage() {
     setPlacements(getPlacements());
   }, []);
   
-  function handleReset() {
-  if (!confirm("配置データを初期状態へ戻しますか？")) {
-    return;
-  }
-
-  localStorage.removeItem("placements");
-
-  router.refresh();
-
-  window.location.reload();
-}
-
   const router = useRouter();
+
+  function handleReset() {
+    if (!confirm("配置データを初期状態へ戻しますか？")) {
+      return;
+    }
+
+    localStorage.removeItem("placements");
+
+    router.refresh();
+
+    window.location.reload();
+  }
 
   const handleDelete = (id: number) => {
     const ok = window.confirm("この配置を削除しますか？");
@@ -60,9 +60,10 @@ export default function PlacementsPage() {
         <Sidebar />
 
         <main className="flex-1 p-8">
-          <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-2xl font-bold">配置管理</h2>
-
+          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <h2 className="text-2xl font-bold md:text-3xl">
+              配置管理
+            </h2>
 
             <div className="mb-6 rounded-lg bg-green-50 p-4">
 
@@ -89,7 +90,7 @@ export default function PlacementsPage() {
               onClick={handleReset}
               className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
             >
-              🔄 開発データ初期化
+              🔄 データ初期化
             </button>
 
 
@@ -97,7 +98,7 @@ export default function PlacementsPage() {
 
           <div className="overflow-hidden rounded-lg bg-white shadow">
             <div className="overflow-x-auto">
-             <table className="w-full">
+             <table className="w-full min-w-[700px]">
               <thead className="bg-gray-100">
                 <tr>
                   <th className="px-4 py-3 text-left">ID</th>

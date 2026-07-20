@@ -16,10 +16,10 @@ export default function NewProjectPage() {
       <div className="flex">
         <Sidebar />
 
-        <main className="flex-1 p-8">
-          <h2 className="text-2xl font-bold mb-6">案件登録</h2>
+        <main className="flex-1 p-4 md:p-8">
+          <h2 className="mb-6 text-xl font-bold md:text-2xl">案件登録</h2>
 
-          <div className="bg-white rounded-xl shadow p-6 max-w-2xl">
+          <div className="max-w-2xl rounded-xl bg-white p-4 shadow md:p-6">
 
             <div className="mb-4">
               <label className="block font-semibold mb-2">
@@ -52,7 +52,7 @@ export default function NewProjectPage() {
 
               <input
                 type="date"
-                className="border rounded-lg px-4 py-2"
+                className="w-full border rounded-lg px-4 py-2"
               />
             </div>
 

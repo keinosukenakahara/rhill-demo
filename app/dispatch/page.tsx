@@ -42,7 +42,7 @@ export default function DispatchPage() {
 
   return (
     <main className="p-8">
-      <div className="flex justify-between items-center mb-6">
+      <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <h1 className="text-3xl font-bold">
           🚚 手配管理
         </h1>
@@ -64,7 +64,7 @@ export default function DispatchPage() {
 
         <Link
           href="/dispatch/new"
-          className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+          className="rounded bg-blue-600 px-3 py-2 text-sm text-white hover:bg-blue-700 md:px-4 md:text-base"
         >
           ＋ 新規手配
         </Link>
@@ -72,7 +72,7 @@ export default function DispatchPage() {
 
       <div className="overflow-x-auto rounded-lg border bg-white shadow">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[700px]">
             <thead className="bg-gray-100">
               <tr>
                 <th className="p-3 text-left">担当者</th>

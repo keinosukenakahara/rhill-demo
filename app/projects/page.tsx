@@ -1,8 +1,6 @@
 
 "use client";
 
-"use client";
-
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
@@ -61,9 +59,9 @@ export default function ProjectsPage() {
 
         <div className="flex justify-between items-center mb-6">
         
-            <h1 className="text-3xl font-bold">
-              案件一覧
-            </h1>
+          <h1 className="text-2xl font-bold md:text-3xl">
+            案件一覧
+          </h1>
 
             <div className="mb-6 rounded-lg bg-blue-50 p-4">
               <h3 className="mb-2 font-bold text-blue-700">
@@ -79,7 +77,7 @@ export default function ProjectsPage() {
 
             <Link
               href="/projects/new"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+              className="rounded-lg bg-blue-600 px-3 py-2 text-sm text-white hover:bg-blue-700 md:px-4 md:text-base"
             >
               ＋ 新規案件
             </Link>
@@ -100,8 +98,8 @@ export default function ProjectsPage() {
           検索結果：{filteredProjects.length}件
           </p>
 
-          <div className="bg-white rounded-lg shadow">
-            <table className="w-full">
+          <div className="overflow-x-auto rounded-lg bg-white shadow">
+            <table className="w-full min-w-[700px]">
               <thead className="bg-gray-100">
                 <tr>
                   <th className="text-left p-4">社員名</th>
