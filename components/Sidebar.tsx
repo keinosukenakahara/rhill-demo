@@ -135,6 +135,15 @@ export default function Sidebar({
           </li>
 
 
+          <li>
+            <Link
+              href="/delivery"
+              className="block rounded px-3 py-2 hover:bg-gray-700"
+            >
+              📦 宅配管理
+            </Link>
+          </li>
+
           <hr className="my-4 border-gray-600" />
 
 
