@@ -1,7 +1,5 @@
 import Link from "next/link";
 import DashboardCard from "@/components/DashboardCard";
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
 import { getProjects } from "@/lib/projects";
 import { getPlacements } from "@/lib/placements";
 import { getDispatches } from "@/lib/dispatches";
@@ -35,16 +33,10 @@ export default function Home() {
     (p) => p.status === "完了"
   ).length;
 
-  return (
-    <div className="min-h-screen bg-gray-100">
+return (
+  <div className="min-h-screen bg-gray-100">
 
-      <Header />
-
-      <div className="flex">
-
-        <Sidebar />
-        
-          <main className="flex-1 p-8">
+    <main className="flex-1 p-8">
 
             <h2 className="text-3xl font-bold mb-2">
               業務管理システム
@@ -192,8 +184,7 @@ export default function Home() {
               </p>
             </div>
           </main>
-      </div>
 
-    </div>
-  );
+        </div>
+      );
 }
